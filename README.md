@@ -5,7 +5,7 @@ This project envolves:
   * Spring Controllers
   * Database Access using Hibernate.
 
-Some new functionalities such as: 
+Some functionalities that may be added in the future are: 
   * Authentication and Autorization using Spring Security
   * Web Pages for the front-end
   * maybe some other things.   
