@@ -1,29 +1,29 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "candidato")
 public class Candidato implements Serializable {
 
 	@Id
+	@JsonIgnore
 	@Column(name = "id_candidato")
 	private int id_candidato;
-	
+
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_evento",referencedColumnName="id_evento")
 	private Evento evento;
@@ -33,22 +33,21 @@ public class Candidato implements Serializable {
 
 	@Column(name = "cpf", nullable = false)
 	private String cpf;
-	
+
 	@Column(name = "unidade_federativa", nullable = false)
 	private String unidade_federativa;
-	
+
 	@Column(name = "cidade", nullable = false)
 	private String cidade;
-	
+
 	@Column(name = "bairro", nullable = false)
 	private String bairro;
-	
+
 	@Column(name = "data_nascimento", nullable = false)
 	private String data_nascimento;
-	
+
 	@Column(name = "acertos_total", nullable = false)
 	private String acertos_total;
-
 
 	public Candidato(){
 	}	

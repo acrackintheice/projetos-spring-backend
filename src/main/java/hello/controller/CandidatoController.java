@@ -1,67 +1,86 @@
 package hello.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import hello.model.TotalCandidatos;
+import hello.util.CandidatoComparator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import hello.model.Candidato;
 import hello.service.CandidatoService;
 import hello.service.EventoService;
 
+@CrossOrigin
 @RestController
 public class CandidatoController {
 
-	@Autowired
-	CandidatoService candidatoService;
-	
-	@Autowired
-	EventoService eventoService;
+    @Autowired
+    private CandidatoService candidatoService;
 
-	/* [C]reate */
-	@RequestMapping(value = "/candidatos", method = RequestMethod.POST)
-	public String createCandidato(@RequestBody Candidato candidato) {
-		candidato.setEvento(eventoService.findById(28));
-		candidatoService.save(candidato);
-		return "200";
-	}
+    @Autowired
+    private EventoService eventoService;
 
-	/* [R]ead */
-	@RequestMapping(value = "/candidatos", method = RequestMethod.GET)
-	public List<Candidato> getCandidatos() {
-		return candidatoService.findAll();
-	}
+    /* [C]reate */
+    @RequestMapping(value = "/candidatos", method = RequestMethod.POST)
+    public String createCandidato(@RequestBody Candidato candidato) {
+        candidato.setEvento(eventoService.findById(28));
+        candidatoService.save(candidato);
+        return "200";
+    }
 
-	@RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.GET)
-	public Candidato getCandidato(@PathVariable String cpf) {
-		return candidatoService.findByCpf(cpf);
-	}
+    /* [R]ead */
+    @RequestMapping(value = "/candidatos", method = RequestMethod.GET)
+    public List<Candidato> getCandidatos(@RequestParam(required = false, defaultValue = "0", value="from") String fromParam,
+                                         @RequestParam(required = false, defaultValue = "0", value ="to") String toParam,
+                                         @RequestParam(required = false, defaultValue = "false") boolean sorted,
+                                         @RequestParam(required = false, defaultValue = "nome") String sortField) {
 
-	/* [U]pdate */
-	@RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.POST)
-	public String updateCandidato(@PathVariable String cpf, @RequestBody Candidato newCandidato) {
-		Candidato oldCandidato = candidatoService.findByCpf(cpf);
-		if (oldCandidato != null) {
-			newCandidato.setId_candidato(oldCandidato.getId_candidato());
-			candidatoService.update(newCandidato);
-			return "200";
-		} else
-			return "400";
-	}
+        int to = Integer.parseInt(toParam);
+        int from = Integer.parseInt(fromParam);
+        List<Candidato> candidatos = new ArrayList<>();
+        try {
+            candidatos = candidatoService.findAll();
+            if (sorted)
+                candidatos.sort(new CandidatoComparator(sortField));
+            return (to == 0) ? candidatos : candidatos.subList(from, to);
+        } catch (IndexOutOfBoundsException e) {
+            return candidatos;
+        }
+    }
 
-	/* [D]elete */
-	@RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.DELETE)
-	public String deleteCandidato(@PathVariable String cpf) {
-		Candidato candidato = candidatoService.findByCpf(cpf);
-		if (candidato != null) {
-			candidatoService.deleteByCpf(cpf);
-			return "200";
-		} else
-			return "400";
-	}
+    @RequestMapping(value = "/candidatos/totalDeCandidatos", method = RequestMethod.GET)
+    public TotalCandidatos getTotalDeCandidatos() {
+        return new TotalCandidatos(candidatoService.findAll().size());
+    }
+
+
+    @RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.GET)
+    public Candidato getCandidato(@PathVariable String cpf) {
+        return candidatoService.findByCpf(cpf);
+    }
+
+    /* [U]pdate */
+    @RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.POST)
+    public String updateCandidato(@PathVariable String cpf, @RequestBody Candidato newCandidato) {
+        Candidato oldCandidato = candidatoService.findByCpf(cpf);
+        if (oldCandidato != null) {
+            newCandidato.setId_candidato(oldCandidato.getId_candidato());
+            candidatoService.update(newCandidato);
+            return "200";
+        } else
+            return "400";
+    }
+
+    /* [D]elete */
+    @RequestMapping(value = "/candidatos/{cpf}", method = RequestMethod.DELETE)
+    public String deleteCandidato(@PathVariable String cpf) {
+        Candidato candidato = candidatoService.findByCpf(cpf);
+        if (candidato != null) {
+            candidatoService.deleteByCpf(cpf);
+            return "200";
+        } else
+            return "400";
+    }
 }
