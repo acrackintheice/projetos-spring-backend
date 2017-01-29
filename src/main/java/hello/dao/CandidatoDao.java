@@ -20,6 +20,8 @@ public interface CandidatoDao {
 
 	List<Candidato> findAll();
 
+	List<Candidato> findAll(String sortField, boolean asc);
+
 	void deleteByCpf(String cpf);
 
 }

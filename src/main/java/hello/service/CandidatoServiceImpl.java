@@ -2,8 +2,6 @@ package hello.service;
 
 import java.util.List;
 
-import javax.persistence.Column;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +46,10 @@ public class CandidatoServiceImpl implements CandidatoService {
 
 	public List<Candidato> findAll() {
 		return dao.findAll();
+	}
+
+	public List<Candidato> findAll(String sortField, boolean asc) {
+		return dao.findAll(sortField, asc);
 	}
 
 	public void delete(Candidato candidato) {

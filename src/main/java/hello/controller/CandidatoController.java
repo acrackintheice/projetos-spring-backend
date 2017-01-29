@@ -35,15 +35,14 @@ public class CandidatoController {
     public List<Candidato> getCandidatos(@RequestParam(required = false, defaultValue = "0", value="from") String fromParam,
                                          @RequestParam(required = false, defaultValue = "0", value ="to") String toParam,
                                          @RequestParam(required = false, defaultValue = "false") boolean sorted,
-                                         @RequestParam(required = false, defaultValue = "nome") String sortField) {
+                                         @RequestParam(required = false, defaultValue = "nome") String sortField,
+                                         @RequestParam(required = false, defaultValue = "true") boolean asc) {
 
         int to = Integer.parseInt(toParam);
         int from = Integer.parseInt(fromParam);
         List<Candidato> candidatos = new ArrayList<>();
         try {
-            candidatos = candidatoService.findAll();
-            if (sorted)
-                candidatos.sort(new CandidatoComparator(sortField));
+            candidatos = (sorted) ?  candidatoService.findAll(sortField, asc) : candidatoService.findAll();
             return (to == 0) ? candidatos : candidatos.subList(from, to);
         } catch (IndexOutOfBoundsException e) {
             return candidatos;

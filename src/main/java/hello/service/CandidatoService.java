@@ -17,6 +17,8 @@ public interface CandidatoService {
 	void update(Candidato Candidato);
 
 	List<Candidato> findAll();
+
+	List<Candidato> findAll(String sortField, boolean asc);
 	
 	List<Candidato> findByName(String name);
 	

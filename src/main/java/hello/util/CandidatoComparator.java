@@ -17,7 +17,7 @@ public class CandidatoComparator implements Comparator<Candidato> {
 
         public int compare(Candidato e1, Candidato e2) {
             return (campo.equals("cpf"))            ? e1.getCpf().compareTo(e2.getCpf())  :
-                   (campo.equals("acertos_total"))  ? e1.getAcertos_total().compareTo(e2.getAcertos_total())
+                   (campo.equals("acertosTotal"))   ? e1.getAcertos_total().compareTo(e2.getAcertos_total())
                                                     : e1.getNome().compareTo(e2.getNome());
         }
 

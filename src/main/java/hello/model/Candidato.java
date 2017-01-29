@@ -21,7 +21,7 @@ public class Candidato implements Serializable {
 	@Id
 	@JsonIgnore
 	@Column(name = "id_candidato")
-	private int id_candidato;
+	private int idCandidato;
 
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -53,11 +53,11 @@ public class Candidato implements Serializable {
 	}	
 	
 	public int getId_candidato() {
-		return id_candidato;
+		return idCandidato;
 	}
 
-	public void setId_candidato(int id_candidato) {
-		this.id_candidato = id_candidato;
+	public void setId_candidato(int idCandidato) {
+		this.idCandidato = idCandidato;
 	}
 
 	public Evento getEvento() {
@@ -133,7 +133,7 @@ public class Candidato implements Serializable {
 		if (!(obj instanceof Candidato))
 			return false;
 		Candidato other = (Candidato) obj;
-		if (id_candidato != other.id_candidato)
+		if (idCandidato != other.idCandidato)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -151,14 +151,14 @@ public class Candidato implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id_candidato;
+		result = prime * result + idCandidato;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Candidato [id=" + id_candidato + ", nome=" + nome + "]";
+		return "Candidato [id=" + idCandidato + ", nome=" + nome + "]";
 	}
 
 }

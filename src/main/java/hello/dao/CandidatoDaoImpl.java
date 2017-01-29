@@ -3,6 +3,7 @@ package hello.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -32,10 +33,16 @@ public class CandidatoDaoImpl extends AbstractDao<Integer, Candidato> implements
 		query.executeUpdate();
 	}
 
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Candidato> findAll() {
 		return createEntityCriteria().list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Candidato> findAll(String sortField, boolean asc) {
+		return (asc) ? createEntityCriteria().addOrder(Order.asc( sortField)).list()
+					 : createEntityCriteria().addOrder(Order.desc(sortField)).list();
 	}
 
 	@SuppressWarnings("unchecked")
