@@ -1,17 +1,15 @@
 package hello.dao;
 
-import java.util.List;
-
 import hello.model.Evento;
 
+import java.util.List;
+
+/**
+ * Created by DU on 17/04/2017.
+ */
 public interface EventoDao {
 
-	Evento findById(int id);
+    List<Evento> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to);
 
-	void save(Evento client);
-
-	void deleteById(int id);
-
-	List<Evento> findAll();
-
+    List<Evento> findAll();
 }

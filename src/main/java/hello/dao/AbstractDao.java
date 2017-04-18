@@ -2,6 +2,8 @@ package hello.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+
+import hello.model.Evento;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,8 +24,8 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     protected Session getSession(){
         return sessionFactory.getCurrentSession();
     }
- 
-    @SuppressWarnings("unchecked")
+
+        @SuppressWarnings("unchecked")
     public T getByKey(PK key) {
         return (T) getSession().get(persistentClass, key);
     }

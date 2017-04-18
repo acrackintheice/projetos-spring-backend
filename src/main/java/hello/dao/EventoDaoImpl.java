@@ -1,33 +1,24 @@
 package hello.dao;
 
-import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
+import hello.model.Evento;
 import org.springframework.stereotype.Repository;
 
-import hello.model.Evento;
+import java.util.List;
+
+/**
+ * Created by DU on 17/04/2017.
+ */
 
 @Repository("eventoDao")
-public class EventoDaoImpl extends AbstractDao<Integer, Evento> implements EventoDao {
+public class EventoDaoImpl extends AbstractDao<Integer, Evento> implements EventoDao{
 
-	public Evento findById(int id) {
-		return getByKey(id);
-	}
+    @Override
+    public List<Evento> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
+        return null;
+    }
 
-	public void save(Evento evento) {
-		persist(evento);
-	}
-
-	public void deleteById(int id) {
-		Query query = getSession().createSQLQuery("delete from evento where id_evento = :id_evento");
-		query.setInteger("id_evento", id);
-		query.executeUpdate();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Evento> findAll() {
-		return createEntityCriteria().list();
-	}
-
+    @Override
+    public List<Evento> findAll() {
+        return createEntityCriteria().list();
+    }
 }

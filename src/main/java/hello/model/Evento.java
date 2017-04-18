@@ -1,124 +1,76 @@
 package hello.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * Created by DU on 17/04/2017.
+ */
 @Entity
-@Table(name = "evento")
-public class Evento {
-	
-	@Id
+@Table(name = "cronograma")
+public class Evento implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_evento")
-	private int id_evento;
-	
-	@Column(name = "descricao_evento", nullable = false)
-	String descricao_evento;
-	
-	@Column(name = "ano_evento", nullable = false)
-	int ano_evento;
+    private Integer id;
 
-	@Column(name = "acerto_minimo_exigido", nullable = false)
-	int acerto_minimo_exigido;
-	
-	@Column(name = "media_acertos", nullable = false)
-	double media_acertos;
-	
-	@Column(name = "numero_inscritos", nullable = false)
-	double numero_inscritos;
-	
-	@Column(name = "numero_vagas", nullable = false)
-	int numero_vagas;
-	
-	public int getId_evento() {
-		return id_evento;
-	}
+    @Type(type="date")
+    Date data;
 
-	public void setId_evento(int id_evento) {
-		this.id_evento = id_evento;
-	}
+    @Type(type="text")
+    String descricao;
 
-	public String getDescricao_evento() {
-		return descricao_evento;
-	}
+    public static long getSerialVersionUID() {
 
-	public void setDescricao_evento(String descricao_evento) {
-		this.descricao_evento = descricao_evento;
-	}
-
-	public int getAno_evento() {
-		return ano_evento;
-	}
-
-	public void setAno_evento(int ano_evento) {
-		this.ano_evento = ano_evento;
-	}
-
-	public int getAcerto_minimo_exigido() {
-		return acerto_minimo_exigido;
-	}
-
-	public void setAcerto_minimo_exigido(int acerto_minimo_exigido) {
-		this.acerto_minimo_exigido = acerto_minimo_exigido;
-	}
-
-	public double getMedia_acertos() {
-		return media_acertos;
-	}
-
-	public void setMedia_acertos(double media_acertos) {
-		this.media_acertos = media_acertos;
-	}
-
-	public double getNumero_inscritos() {
-		return numero_inscritos;
-	}
-
-	public void setNumero_inscritos(double numero_inscritos) {
-		this.numero_inscritos = numero_inscritos;
-	}
-
-	public int getNumero_vagas() {
-		return numero_vagas;
-	}
-
-	public void setNumero_vagas(int numero_vagas) {
-		this.numero_vagas = numero_vagas;
-	}
-	
-	public Evento(){
-		
-	}
-	
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Evento))
-            return false;
-        Evento other = (Evento) obj;
-        if (id_evento != other.id_evento)
-            return false;
-        return true;
+        return serialVersionUID;
     }
-    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Evento evento = (Evento) o;
+
+        if (!id.equals(evento.id)) return false;
+        if (data != null ? !data.equals(evento.data) : evento.data != null) return false;
+        return descricao != null ? descricao.equals(evento.descricao) : evento.descricao == null;
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id_evento;
+        int result = id.hashCode();
+        result = 31 * result + (data != null ? data.hashCode() : 0);
+        result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
         return result;
     }
- 
-    @Override
-    public String toString() {
-        return "Evento [id_evento=" + id_evento + "]";
-    }
-	
 }
