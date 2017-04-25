@@ -10,13 +10,14 @@ import java.util.List;
  */
 
 @Repository("eventoDao")
-public class EventoDaoImpl extends AbstractDao<Integer, Evento> implements EventoDao{
+public class EventoDaoImplHibernate extends HibernateAbstractDao<Integer, Evento> implements EventoDao{
 
-    @Override
-    public List<Evento> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
-        return null;
-    }
 
+    /**
+     * @inheritDoc
+     *
+     * Implementação utilizando o Hibernate
+     */
     @Override
     public List<Evento> findAll() {
         return createEntityCriteria().list();

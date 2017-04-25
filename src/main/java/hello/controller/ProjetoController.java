@@ -3,12 +3,12 @@ package hello.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import hello.model.Projeto;
 import hello.model.View;
-import hello.service.ProjectService;
+import hello.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.transaction.annotation.Transactional;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @CrossOrigin
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProjetoController {
 
     @Autowired
-    private ProjectService projetoService;
+    private ProjetoService projetoService;
 
     @JsonView(View.Simples.class)
     @RequestMapping(value = "/projetos", method = RequestMethod.GET)

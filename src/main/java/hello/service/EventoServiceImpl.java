@@ -25,8 +25,4 @@ public class EventoServiceImpl implements EventoService {
         return dao.findAll();
     }
 
-    @Override
-    public List<Evento> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
-        return dao.findAll(sorted, sortField, sortOrder, filterFields, filterValues, from, to);
-    }
 }

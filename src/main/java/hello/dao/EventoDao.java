@@ -9,7 +9,10 @@ import java.util.List;
  */
 public interface EventoDao {
 
-    List<Evento> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to);
-
+    /**
+     * @inheritDoc
+     *
+     * retuns
+     */
     List<Evento> findAll();
 }
