@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 
     @JsonView(View.Completo.class)
     @ManyToOne
-    @JoinColumn(name = "disciplinaAtual", referencedColumnName = "id_disciplina")
+    @JoinColumn(name = "disciplina_atual", referencedColumnName = "id_disciplina")
     private Disciplina disciplinaAtual;
 
     public Usuario(){};

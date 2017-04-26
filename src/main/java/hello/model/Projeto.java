@@ -27,8 +27,7 @@ public class Projeto implements Serializable {
     private Integer id_curso;
 
     @JsonView(View.Simples.class)
-    @OneToMany
-    @JoinColumn(name="id_projeto")
+    @OneToMany(mappedBy = "projeto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Usuario> autores;
 

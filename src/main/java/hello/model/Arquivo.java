@@ -5,9 +5,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by DU on 18/04/2017.
- */
 
 @Entity
 @Table(name = "arquivos")
@@ -19,7 +16,8 @@ public class Arquivo implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    String nomeArquivo;
+    @Column(name = "nome_arquivo")
+    String nome_arquivo;
 
     @Type(type="text")
     String descricao;
@@ -42,12 +40,12 @@ public class Arquivo implements Serializable{
         this.id = id;
     }
 
-    public String getNomeArquivo() {
-        return nomeArquivo;
+    public String getNome_arquivo() {
+        return nome_arquivo;
     }
 
-    public void setNomeArquivo(String nomeArquivo) {
-        this.nomeArquivo = nomeArquivo;
+    public void setNome_arquivo(String nome_arquivo) {
+        this.nome_arquivo = nome_arquivo;
     }
 
     public String getDescricao() {
@@ -66,14 +64,14 @@ public class Arquivo implements Serializable{
         Arquivo arquivo = (Arquivo) o;
 
         if (id != arquivo.id) return false;
-        if (nomeArquivo != null ? !nomeArquivo.equals(arquivo.nomeArquivo) : arquivo.nomeArquivo != null) return false;
+        if (nome_arquivo != null ? !nome_arquivo.equals(arquivo.nome_arquivo) : arquivo.nome_arquivo != null) return false;
         return descricao != null ? descricao.equals(arquivo.descricao) : arquivo.descricao == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (nomeArquivo != null ? nomeArquivo.hashCode() : 0);
+        result = 31 * result + (nome_arquivo != null ? nome_arquivo.hashCode() : 0);
         result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
         return result;
     }
