@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.dao.EventoDao;
+import hello.dao.old.EventoDao;
 import hello.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

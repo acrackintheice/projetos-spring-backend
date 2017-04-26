@@ -1,7 +1,7 @@
-package hello.controller;
+package hello.controller.old;
 
-import hello.model.Arquivo;
-import hello.service.ArquivoService;
+import hello.model.Link;
+import hello.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,20 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Created by DU on 19/04/2017.
+ * Created by DU on 22/04/2017.
  */
 
 @CrossOrigin
 @RestController
-public class ArquivoController {
+public class LinkController {
 
     @Autowired
-    private ArquivoService arquivoService;
+    private LinkService linkService;
 
-    @RequestMapping(value = "/arquivos")
-    public List<Arquivo> getArquivos() {
-        return arquivoService.findAll();
+    @RequestMapping(value = "/links")
+    public List<Link> getLinks(){
+        return linkService.findAll();
     }
-
 
 }

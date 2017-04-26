@@ -1,5 +1,6 @@
-package hello.dao;
+package hello.dao.old;
 
+import hello.dao.HibernateAbstractDao;
 import hello.model.Link;
 import org.springframework.stereotype.Repository;
 

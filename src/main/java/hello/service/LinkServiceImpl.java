@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.dao.LinkDao;
+import hello.dao.old.LinkDao;
 import hello.model.Link;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

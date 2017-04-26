@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.dao.ArquivoDao;
+import hello.dao.old.ArquivoDao;
 import hello.model.Arquivo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
