@@ -16,8 +16,8 @@ public class UsuarioDaoImplHibernate extends HibernateAbstractListDao<Integer, U
      * Implementação utilizando o Hibernate
      */
     @Override
-    public List<Usuario> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
-        return super.findAll(sorted, sortField, sortOrder, filterFields, filterValues, from, to, "id");
+    public List<Usuario> findAll(List<String> sortFields, List<String> sortOrders, List<String> filterFields, List<String> filterValues, int from, int to) {
+        return super.findAll(sortFields, sortOrders, filterFields, filterValues, from, to, "id");
     }
 
     /**

@@ -11,4 +11,10 @@ public class View {
     public interface Completo extends Simples {
     }
 
+    public interface Usuario extends Simples{
+    }
+
+    public interface Projeto extends Simples{
+    }
+
 }

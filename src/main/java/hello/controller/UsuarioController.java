@@ -16,18 +16,22 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @JsonView(View.Simples.class)
+    @JsonView(View.Usuario.class)
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public List<Usuario> getCandidatos(@RequestParam(required = false, defaultValue = "0", value = "from") String fromParam,
                                        @RequestParam(required = false, defaultValue = "0", value = "to") String toParam,
-                                       @RequestParam(required = false, defaultValue = "false") boolean sorted,
-                                       @RequestParam(required = false, defaultValue = "nome") String sortField,
-                                       @RequestParam(required = false, defaultValue = "asc") String sortOrder,
+                                       @RequestParam(required = false, defaultValue = "") List<String> sortFields,
+                                       @RequestParam(required = false, defaultValue = "") List<String> sortOrders,
                                        @RequestParam(required = false, defaultValue = "") List<String> filterFields,
                                        @RequestParam(required = false, defaultValue = "") List<String> filterValues) {
-        int to = Integer.parseInt(toParam);
-        int from = Integer.parseInt(fromParam);
-        List<Usuario> usuarios = usuarioService.findAll(sorted, sortField, sortOrder, filterFields, filterValues, from, to);
+        List<Usuario> usuarios = usuarioService.findAll(
+                sortFields,
+                sortOrders,
+                filterFields,
+                filterValues,
+                Integer.parseInt(fromParam),
+                Integer.parseInt(toParam)
+        );
         return usuarios;
     }
 

@@ -14,8 +14,8 @@ public class ProjetoDaoImplHibernate extends HibernateAbstractListDao<Integer, P
      * Implementação utilizando o Hibernate
      */
     @Override
-    public List<Projeto> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
-        return super.findAll(sorted, sortField, sortOrder, filterFields, filterValues, from, to, "id_projeto");
+    public List<Projeto> findAll(List<String> sortFields, List<String> sortOrders, List<String> filterFields, List<String> filterValues, int from, int to) {
+        return super.findAll(sortFields, sortOrders, filterFields, filterValues, from, to, "id_projeto");
     }
 
     /**

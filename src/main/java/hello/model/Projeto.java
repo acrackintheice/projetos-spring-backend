@@ -1,5 +1,7 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -7,8 +9,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -26,7 +26,7 @@ public class Projeto implements Serializable {
 
     private Integer id_curso;
 
-    @JsonView(View.Simples.class)
+    @JsonView(View.Projeto.class)
     @OneToMany(mappedBy = "projeto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Usuario> autores;
@@ -34,9 +34,7 @@ public class Projeto implements Serializable {
     @JsonView(View.Simples.class)
     private boolean concluido;
 
-
     @JsonView(View.Simples.class)
-
     private String titulo;
 
     @JsonView(View.Simples.class)

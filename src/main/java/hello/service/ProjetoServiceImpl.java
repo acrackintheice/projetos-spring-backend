@@ -16,26 +16,23 @@ public class ProjetoServiceImpl implements ProjetoService {
     @Autowired
     private ProjetoDao dao;
 
+    /**
+     * @inheritDoc
+     *
+     * Implementação que acessa um banco de dados relacional
+     */
     @Override
     public Long total(List<String> filterFields, List<String> filterValues) {
-        fixFilters(filterFields);
         return dao.total(filterFields, filterValues);
     }
 
+    /**
+     * @inheritDoc
+     *
+     * Implementação que acessa um banco de dados relacional
+     */
     @Override
-    public List<Projeto> findAll(boolean sorted, String sortField, String sortOrder, List<String> filterFields, List<String> filterValues, int from, int to) {
-        List<Projeto> projetos;
-        fixFilters(filterFields);
-        projetos = dao.findAll(sorted, sortField, sortOrder, filterFields, filterValues, from, to);
-        return projetos;
-    }
-
-    private void fixFilters(List<String> filterFields){
-        if (filterFields.contains("membrosDaBanca")) {
-            filterFields.set(filterFields.indexOf("membrosDaBanca"), "membrosDaBanca.nome");
-        }
-        if (filterFields.contains("autores")) {
-            filterFields.set(filterFields.indexOf("autores"), "autores.nome");
-        }
+    public List<Projeto> findAll(List<String> sortFields, List<String> sortOrders, List<String> filterFields, List<String> filterValues, int from, int to) {
+        return dao.findAll(sortFields, sortOrders, filterFields, filterValues, from, to);
     }
 }

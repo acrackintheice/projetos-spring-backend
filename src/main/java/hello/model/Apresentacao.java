@@ -1,21 +1,27 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "data_apresentacao")
 public class Apresentacao {
 
+    @JsonView(View.Simples.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @JsonView(View.Simples.class)
     @Column(name = "data_inicio")
     Date dataInicio;
 
+    @JsonView(View.Simples.class)
     @Column(name = "data_termino")
     Date dataTermino;
 
+    @JsonView(View.Simples.class)
     @OneToOne
     @JoinColumn(name = "id_projeto")
     Projeto projeto;

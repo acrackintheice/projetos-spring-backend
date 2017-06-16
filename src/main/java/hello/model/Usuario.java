@@ -1,7 +1,6 @@
 package hello.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -39,7 +38,7 @@ public class Usuario implements Serializable {
     @JsonView(View.Completo.class)
     private Date data_criacao;
 
-    @JsonView(View.Completo.class)
+    @JsonView(View.Usuario.class)
     @ManyToOne
     @JoinColumn(name = "id_projeto")
     private Projeto projeto;
