@@ -27,7 +27,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
-        sessionFactory.setPackagesToScan(new String[] { "projetostcc.model" });
+        sessionFactory.setPackagesToScan(new String[] { "hello.model" });
         sessionFactory.setHibernateProperties(getHibernateProperties());
         return sessionFactory;
     }

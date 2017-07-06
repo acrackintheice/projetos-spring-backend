@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="cadastroPessoaService" class="projetostcc.service.webservice.CadastroPessoaServiceImpl">
+        <constructor-arg>
+            <bean class="projetostcc.service.webservice.proxy.ProxyCadastroPessoaServiceImpl">
+                <constructor-arg>
+                    <bean class="projetostcc.core.security.cas.BasicAuthenticationHttpInvokerProxyFactoryBean">
+                        <constructor-arg value="${remoting.cadastroPessoaService.username}"/>
+                        <constructor-arg value="${remoting.cadastroPessoaService.password}"/>
+                        <constructor-arg value="${remoting.cadastroPessoaService.url}"/>
+                        <property name="serviceInterface"
+                                  value="br.ufsc.services.pessoa.interfaces.CadastroPessoaService"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="cagrService" class="projetostcc.service.webservice.CAGRServiceImpl">
+        <constructor-arg>
+            <bean class="projetostcc.service.webservice.proxy.ProxyCAGRServiceImpl">
+                <constructor-arg>
+                    <bean class="projetostcc.core.security.cas.BasicAuthenticationHttpInvokerProxyFactoryBean">
+                        <constructor-arg value="${remoting.cagrService.username}"/>
+                        <constructor-arg value="${remoting.cagrService.password}"/>
+                        <constructor-arg value="${remoting.cagrService.url}"/>
+                        <property name="serviceInterface" value="br.ufsc.cagr.services.CAGRService"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+</beans>

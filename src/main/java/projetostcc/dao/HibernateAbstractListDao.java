@@ -60,7 +60,7 @@ public abstract class HibernateAbstractListDao<PK extends Serializable, T> exten
         /* Para as coisas funcionarem direito, a busca precisou ser dividida em duas etapas, pois
          * quando a busca é realizada, os joins fazem com que vários resultados repetidos apareçam */
 
-        /*  Na primeira etapa a busca é realizada e são selecionados alguns valores distintos para o atributo
+        /*  Na primeira etapa a busca é realizada é são selecionados alguns valores distintos para o atributo
             definido pelo parametro propriedadesDistintas. O número de valores selecionados depende dos parametros
            to e from      */
         List<T> uniqueSubList = query
